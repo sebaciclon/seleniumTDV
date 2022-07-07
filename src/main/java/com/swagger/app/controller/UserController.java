@@ -1,4 +1,4 @@
-package com.seleniumTDV.app.controller;
+package com.swagger.app.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.seleniumTDV.app.model.User;
-import com.seleniumTDV.app.service.UserServiceImpl;
+
+import com.swagger.app.model.User;
+import com.swagger.app.service.UserServiceImpl;
+
 
 
 
@@ -25,22 +27,19 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	// create a new product
-	
+	// create a new user
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody User u) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(u));
 	}
 	
-	// List of products
-	
+	// List of users
 	@GetMapping
 	public List<User> findAll(){
 		return userService.findAll();
 	}
 	
-	// read an product
-	
+	// read an user
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {
 		Optional<User> oUser = userService.findById(id);
@@ -51,8 +50,7 @@ public class UserController {
 		return ResponseEntity.ok(oUser);
 	}
 	
-	// update an product
-	
+	// update an user
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody User u, @PathVariable Long id) {
 		Optional<User> oUser = userService.findById(id);
@@ -66,12 +64,12 @@ public class UserController {
 		oUser.get().setEmail(u.getEmail());
 		oUser.get().setUsername(u.getUsername());
 		oUser.get().setPassword(u.getPassword());
+		oUser.get().setEdad(u.getEdad());
 			
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(oUser.get()));
 	}
 	
-	// delete an product
-	
+	// delete an user
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Optional<User> oUser = userService.findById(id);

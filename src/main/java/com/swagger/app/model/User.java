@@ -1,4 +1,4 @@
-package com.seleniumTDV.app.model;
+package com.swagger.app.model;
 
 import java.io.Serializable;
 
@@ -34,8 +34,11 @@ public class User implements Serializable {
 
 	@Column(length = 200,nullable = false)
 	private String password;
+	
+	@Column(length = 200,nullable = false)
+	private int edad;
 
-	public User(Long id, String name, String surname, String email, String username, String password) {
+	public User(Long id, String name, String surname, String email, String username, String password, int edad) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,6 +46,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.username = username;
 		this.password = password;
+		this.edad = edad;
 	}
 
 	public User() {
@@ -108,6 +112,14 @@ public class User implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 	
 	
