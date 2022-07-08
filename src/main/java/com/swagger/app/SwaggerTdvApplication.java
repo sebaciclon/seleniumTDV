@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SeleniumTdvApplication {
+public class SwaggerTdvApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SeleniumTdvApplication.class, args);
+		SpringApplication.run(SwaggerTdvApplication.class, args);
 	}
 
 }
