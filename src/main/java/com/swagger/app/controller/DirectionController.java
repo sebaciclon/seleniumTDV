@@ -37,8 +37,8 @@ public class DirectionController {
 	@ApiOperation(value = "create, Crea una nueva direccion", notes = "Servicio encargado de crear una nueva direccion")
 	@ApiResponses(
 			value = {
-					@ApiResponse(code = 200, message = "Success. La direccion se cargo correctamente", response = UserFK.class),
-					@ApiResponse(code = 404, message = "Not found. Error al cargar la direccion"),
+					@ApiResponse(code = 201, message = "Created. La direccion se creo correctamente", response = UserFK.class),
+					@ApiResponse(code = 404, message = "Not found. Error al crear la direccion"),
 		            @ApiResponse(code = 500, message = "Internal error. Error inesperado del sistema")})
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody UserFK u) {

@@ -35,7 +35,7 @@ public class UserServiceImpl implements BaseService<User> {
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-		pr.deleteById(id);
+		pr.deleteById((long) id);
 		
 	}
 

@@ -17,6 +17,7 @@ import com.swagger.app.model.User;
 import com.swagger.app.service.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -31,13 +32,13 @@ public class UserController {
 	@ApiOperation(value = "create, Crea un nuevo usuario", notes = "Servicio encargado de crear un nuevo usuario")
 	@ApiResponses(
 			value = {
-					@ApiResponse(code = 200, message = "Success. El usuario se cargo correctamente", response = String.class),
+					@ApiResponse(code = 201, message = "Created. El usuario se creo correctamente", response = String.class),
 					@ApiResponse(code = 404, message = "Not found. Error al cargar el usuario"),
 		            @ApiResponse(code = 500, message = "Internal error. Error inesperado del sistema")})
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody User u) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(u));
+	public ResponseEntity<?> create(@ApiParam(value = "Usuario de tipo User", required = true) @RequestBody User usuario) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(usuario));
 	}
 	
 	@ApiOperation(value = "findAll, Retorna una lista de usuarios", notes = "Servicio encargado de listar todos los usuarios")
@@ -57,9 +58,9 @@ public class UserController {
 					@ApiResponse(code = 200, message = "Success. El usuario se cargo correctamente", response = String.class),
 					@ApiResponse(code = 404, message = "Not found. Error al cargar el usuario"),
 		            @ApiResponse(code = 500, message = "Internal error. Error inesperado del sistema")})
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getById(@PathVariable Long id) {
-		Optional<User> oUser = userService.findById(id);
+	@GetMapping("/{idUsuario}")
+	public ResponseEntity<?> getById(@ApiParam(value = "Identificador unico del usuario tipo Long", required = true) @PathVariable Long idUsuario) {
+		Optional<User> oUser = userService.findById(idUsuario);
 			
 		if(!oUser.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -73,18 +74,19 @@ public class UserController {
 			@ApiResponse(code = 200, message = "Success. El usuario se actualizo correctamente", response = String.class),
 			@ApiResponse(code = 404, message = "Not found. Error al actualizar el usuario"),
             @ApiResponse(code = 500, message = "Internal error. Error inesperado del sistema")})
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody User u, @PathVariable Long id) {
-		Optional<User> oUser = userService.findById(id);
+	@PutMapping("/{idUsuario}")
+	public ResponseEntity<?> update(@ApiParam(value = "Usuario de tipo User", required = true) @RequestBody User usuario, 
+			@ApiParam(value = "Identificador unico del usuario tipo Long", required = true) @PathVariable Long idUsuario) {
+		Optional<User> oUser = userService.findById(idUsuario);
 		
 		if(!oUser.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 			
-		oUser.get().setName(u.getName());
-		oUser.get().setSurname(u.getSurname());
-		oUser.get().setEmail(u.getEmail());
-		oUser.get().setEdad(u.getEdad());
+		oUser.get().setName(usuario.getName());
+		oUser.get().setSurname(usuario.getSurname());
+		oUser.get().setEmail(usuario.getEmail());
+		oUser.get().setEdad(usuario.getEdad());
 			
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(oUser.get()));
 	}
@@ -95,15 +97,15 @@ public class UserController {
 					@ApiResponse(code = 200, message = "Success. El usuario se elimino correctamente", response = String.class),
 					@ApiResponse(code = 404, message = "Not found. Error al eliminar el usuario"),
 		            @ApiResponse(code = 500, message = "Internal error. Error inesperado del sistema")})
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
-		Optional<User> oUser = userService.findById(id);
+	@DeleteMapping("/{idUsuario}")
+	public ResponseEntity<?> delete(@ApiParam(value = "Identificador unico del usuario tipo Long", required = true) @PathVariable Long idUsuario) {
+		Optional<User> oUser = userService.findById(idUsuario);
 			
 		if(!oUser.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 			
-		userService.deleteById(id);
+		userService.deleteById(idUsuario);
 		return ResponseEntity.ok().build();
 	}
 	
