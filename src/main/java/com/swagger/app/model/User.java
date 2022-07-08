@@ -28,24 +28,16 @@ public class User implements Serializable {
 	
 	@Column(length = 200,nullable = false)
 	private String email;
-
-	@Column(length = 200,nullable = false)
-	private String username;
-
-	@Column(length = 200,nullable = false)
-	private String password;
 	
 	@Column(length = 200,nullable = false)
 	private int edad;
 
-	public User(Long id, String name, String surname, String email, String username, String password, int edad) {
+	public User(Long id, String name, String surname, String email, int edad) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
-		this.username = username;
-		this.password = password;
 		this.edad = edad;
 	}
 
@@ -53,13 +45,12 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(String name, String surname, String email, String username, String password) {
+	public User(String name, String surname, String email, int edad) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
-		this.username = username;
-		this.password = password;
+		this.edad = edad;
 	}
 
 	public Long getId() {
@@ -93,23 +84,6 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

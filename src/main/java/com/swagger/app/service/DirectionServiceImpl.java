@@ -5,39 +5,38 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.swagger.app.model.User;
-import com.swagger.app.repository.UserRepository;
+import com.swagger.app.model.Direction;
+import com.swagger.app.repository.DirectionRepository;
+
 
 @Service
-public class UserServiceImpl implements BaseService<User> {
+public class DirectionServiceImpl implements BaseService<Direction>{
 
 	@Autowired
-	private UserRepository pr;
+	private DirectionRepository dr;
 
 	@Override
 	@Transactional(readOnly = true)		// en una transaccion de solo lectura, no va a cambiar nada en la db
-	public List<User> findAll() {
-		return pr.findAll();
+	public List<Direction> findAll() {
+		return dr.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<User> findById(Long id) {
-		return pr.findById(id);
+	public Optional<Direction> findById(Long id) {
+		return dr.findById(id);
 	}
 
 	@Override
 	@Transactional		// guarda la entidad en la db, por ende va a cambiar la db
-	public User save(User p) {
-		return pr.save(p);
+	public Direction save(Direction d) {
+		return dr.save(d);
 	}
 
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-		pr.deleteById(id);
+		dr.deleteById(id);
 		
 	}
-
-
 }
